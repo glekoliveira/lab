@@ -1,11 +1,11 @@
-name: CI com Teste
+name: CI com Teste + Docker
 
 on:
   push:
     branches: [ "main" ]
 
 jobs:
-  build-test:
+  build-test-docker:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,3 +21,7 @@ jobs:
 
       - name: Run tests
         run: pytest
+
+      - name: Build Docker image
+        run: |
+          docker build -t pipeline-lab:${{ github.sha }} .
